@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact & devis gratuit — ASTI.BAT · Aucamville</title>
+<meta name="description" content="Contactez ASTI.BAT pour un devis gratuit. Visite technique sous 5 jours, devis sous 48h. Tél. 06 88 50 53 41 · Aucamville (31140)." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark"><span>AB</span></span>
+      <span class="brand__name">ASTI.BAT<small>Maçonnerie · Gros œuvre</small></span>
+    </a>
+    <nav>
+      <ul class="nav__links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="gros-oeuvre.html">Gros œuvre</a></li>
+        <li><a href="charpente-toiture.html">Charpente & Toiture</a></li>
+        <li><a href="demolition-renovation.html">Démolition & Rénovation</a></li>
+        <li><a href="realisations.html">Réalisations</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <a href="tel:+33688505341" class="nav__phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>
+        06 88 50 53 41
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="page-header" style="padding-bottom: 60px;">
+  <div class="container">
+    <div class="page-header__inner">
+      <div>
+        <div class="page-header__crumbs">
+          <a href="index.html">Accueil</a> <span>/</span> <span>Contact</span>
+        </div>
+        <span class="eyebrow">Devis gratuit · Sans engagement</span>
+        <h1 style="margin-top: 18px;">Parlons de votre projet.</h1>
+        <p class="page-header__lead">Le plus rapide : un coup de fil au 06 88 50 53 41. On répond. Sinon, remplissez le formulaire ci-dessous, on vous rappelle sous 24h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 40px;">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-card reveal">
+        <h3>Demande de devis</h3>
+        <form id="quote-form" novalidate>
+          <div class="form-row">
+            <label>Type de projet</label>
+            <div class="chip-group" data-chip-group>
+              <button type="button" class="chip">Construction neuve</button>
+              <button type="button" class="chip active">Extension / agrandissement</button>
+              <button type="button" class="chip">Rénovation globale</button>
+              <button type="button" class="chip">Toiture / charpente</button>
+              <button type="button" class="chip">Démolition / ouverture mur</button>
+              <button type="button" class="chip">Maçonnerie (terrasse, muret…)</button>
+              <button type="button" class="chip">Autre</button>
+            </div>
+          </div>
+
+          <div class="form-row form-row__split">
+            <div>
+              <label for="firstname">Prénom</label>
+              <input id="firstname" type="text" required />
+            </div>
+            <div>
+              <label for="lastname">Nom</label>
+              <input id="lastname" type="text" required />
+            </div>
+          </div>
+
+          <div class="form-row form-row__split">
+            <div>
+              <label for="phone">Téléphone *</label>
+              <input id="phone" type="tel" required placeholder="06 ..." />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="vous@exemple.fr" />
+            </div>
+          </div>
+
+          <div class="form-row form-row__split">
+            <div>
+              <label for="city">Commune du chantier</label>
+              <input id="city" type="text" placeholder="Ex : Aucamville" />
+            </div>
+            <div>
+              <label for="when">Démarrage souhaité</label>
+              <select id="when">
+                <option>Dès que possible</option>
+                <option>Sous 1 à 3 mois</option>
+                <option>Sous 3 à 6 mois</option>
+                <option>Pas pressé · je me renseigne</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="msg">Décrivez votre projet</label>
+            <textarea id="msg" placeholder="Surface approx, contraintes, photos à joindre par email ensuite si besoin..."></textarea>
+          </div>
+
+          <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary">
+              Envoyer ma demande
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+            <span class="mono" style="font-size: 0.82rem; color: var(--slate);">Réponse sous 24h ouvrées</span>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="info-card reveal" style="margin-bottom: 24px;">
+          <h3>Coordonnées</h3>
+          <a href="tel:+33688505341" class="info-line" style="text-decoration: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>
+            <div>
+              <b>Appelez-nous</b>
+              <span class="mono" style="font-size: 1.15rem; color: white; letter-spacing: 0.02em;">06 88 50 53 41</span>
+            </div>
+          </a>
+          <a href="mailto:asti.bat.realisation@gmail.com" class="info-line" style="text-decoration: none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <b>Écrivez-nous</b>
+              <span>asti.bat.realisation<br/>@gmail.com</span>
+            </div>
+          </a>
+          <div class="info-line">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <b>Adresse</b>
+              <span>Espace Coworking Ô31<br/>31 route de Paris<br/>31140 Aucamville</span>
+            </div>
+          </div>
+          <div class="info-line">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <b>Horaires</b>
+              <span>Lun – Ven : 8h00 – 18h30<br/>Sam : 9h00 – 12h00 sur RDV</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal" style="background: white; border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px;">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--orange); display: grid; place-items: center; color: white; font-weight: 700; font-family: var(--f-display); font-size: 1.1rem;">BA</div>
+            <div>
+              <b style="display: block; color: var(--navy); font-family: var(--f-display); font-weight: 600; font-size: 1.1rem;">Bulend AGLAR</b>
+              <span style="font-size: 0.88rem; color: var(--slate);">Fondateur · Conducteur de travaux</span>
+            </div>
+          </div>
+          <p style="margin: 0; color: var(--slate); font-size: 0.95rem;">"Quand vous appelez, c'est moi qui décroche. Quand vous demandez un point de chantier, c'est moi qui passe. Un seul interlocuteur du devis à la livraison."</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Map -->
+    <div style="margin-top: 80px;">
+      <div style="display: flex; align-items: end; justify-content: space-between; margin-bottom: 24px; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <span class="eyebrow">Nous localiser</span>
+          <h2 style="margin-top: 14px;">Aucamville, Nord Toulouse</h2>
+        </div>
+        <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=31+route+de+Paris+31140+Aucamville" target="_blank" rel="noopener">Itinéraire Google Maps</a>
+      </div>
+      <div class="map-frame">
+        <iframe loading="lazy" title="Carte Aucamville" src="https://www.openstreetmap.org/export/embed.html?bbox=1.42%2C43.65%2C1.49%2C43.70&layer=mapnik&marker=43.6757%2C1.4451"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="brand"><span class="brand__mark"><span>AB</span></span><span class="brand__name">ASTI.BAT<small>Maçonnerie · Gros œuvre</small></span></a>
+        <p>Entreprise de maçonnerie générale et gros œuvre dans le nord toulousain. De la fondation à la toiture.</p>
+      </div>
+      <div><h4>Services</h4>
+        <ul>
+          <li><a href="gros-oeuvre.html">Gros œuvre & maçonnerie</a></li>
+          <li><a href="charpente-toiture.html">Charpente & toiture</a></li>
+          <li><a href="demolition-renovation.html">Démolition & rénovation</a></li>
+          <li><a href="realisations.html">Réalisations</a></li>
+        </ul>
+      </div>
+      <div><h4>Entreprise</h4>
+        <ul>
+          <li><a href="contact.html">Contact & devis</a></li>
+          <li><a href="#">Zone d'intervention</a></li>
+          <li><a href="#">Garanties</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact"><h4>Nous contacter</h4>
+        <div class="line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg><div><b>06 88 50 53 41</b></div></div>
+        <div class="line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><div>asti.bat.realisation@gmail.com</div></div>
+        <div class="line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div>Espace Coworking Ô31<br/>31 route de Paris, 31140 Aucamville</div></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© ASTI.BAT · Bulend AGLAR</div>
+      <div>Maçonnerie générale & gros œuvre · Aucamville</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

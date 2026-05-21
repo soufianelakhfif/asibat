@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Réalisations — ASTI.BAT · Chantiers Nord Toulouse</title>
+<meta name="description" content="Découvrez les derniers chantiers d'ASTI.BAT : extensions, rénovations, gros œuvre, toitures dans le nord toulousain." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css" />
+<style>
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 36px;
+  }
+  .filter-bar .chip { font-size: 0.92rem; }
+  .project-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+  .project-card__media {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--cream-2);
+  }
+  .project-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .project-card:hover .project-card__media img { transform: scale(1.04); }
+  .project-card__body { padding: 24px; }
+  .project-card__meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+    font-family: var(--f-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .project-card__meta .cat { color: var(--orange); }
+  .project-card__meta .loc { color: var(--slate); }
+  .project-card h3 { font-size: 1.2rem; color: var(--navy); margin-bottom: 8px; }
+  .project-card p { font-size: 0.94rem; color: var(--slate); margin: 0; }
+  .project-card__footer {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 18px 24px;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--slate);
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 980px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="brand">
+      <span class="brand__mark"><span>AB</span></span>
+      <span class="brand__name">ASTI.BAT<small>Maçonnerie · Gros œuvre</small></span>
+    </a>
+    <nav>
+      <ul class="nav__links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="gros-oeuvre.html">Gros œuvre</a></li>
+        <li><a href="charpente-toiture.html">Charpente & Toiture</a></li>
+        <li><a href="demolition-renovation.html">Démolition & Rénovation</a></li>
+        <li><a href="realisations.html" class="active">Réalisations</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <a href="tel:+33688505341" class="nav__phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg>
+        06 88 50 53 41
+      </a>
+      <a href="contact.html" class="btn btn-primary">Devis gratuit</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="container">
+    <div class="page-header__inner">
+      <div>
+        <div class="page-header__crumbs">
+          <a href="index.html">Accueil</a> <span>/</span> <span>Réalisations</span>
+        </div>
+        <span class="eyebrow">Portfolio</span>
+        <h1 style="margin-top: 18px;">Chantiers livrés.</h1>
+        <p class="page-header__lead">Une sélection de nos réalisations récentes dans le nord toulousain. Cliquez pour découvrir le détail de chaque projet.</p>
+      </div>
+      <aside class="page-header__side">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+          <div>
+            <div style="font-family: var(--f-display); font-size: 2.2rem; font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1;">120+</div>
+            <div style="font-size: 0.86rem; color: rgba(255,255,255,.6); margin-top: 6px;">chantiers livrés</div>
+          </div>
+          <div>
+            <div style="font-family: var(--f-display); font-size: 2.2rem; font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1;">4.9<small style="font-size: 1rem; color: rgba(255,255,255,.5);">/5</small></div>
+            <div style="font-size: 0.86rem; color: rgba(255,255,255,.6); margin-top: 6px;">note Google · 47 avis</div>
+          </div>
+          <div>
+            <div style="font-family: var(--f-display); font-size: 2.2rem; font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1;">10 <small style="font-size: 1rem; color: rgba(255,255,255,.5);">ans</small></div>
+            <div style="font-size: 0.86rem; color: rgba(255,255,255,.6); margin-top: 6px;">d'expérience</div>
+          </div>
+          <div>
+            <div style="font-family: var(--f-display); font-size: 2.2rem; font-weight: 700; color: white; letter-spacing: -0.02em; line-height: 1;">0</div>
+            <div style="font-size: 0.86rem; color: rgba(255,255,255,.6); margin-top: 6px;">sinistre déclaré</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar" data-chip-group>
+      <button class="chip active">Tous (12)</button>
+      <button class="chip">Gros œuvre</button>
+      <button class="chip">Toiture</button>
+      <button class="chip">Extension</button>
+      <button class="chip">Rénovation</button>
+      <button class="chip">Démolition</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1503594384566-461fe158e797?auto=format&fit=crop&w=900&q=80" alt="Extension R+1" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Extension</span><span class="loc">L'Union</span></div>
+          <h3>Extension R+1 · 38 m²</h3>
+          <p>Création d'une extension maçonnée à l'étage, raccordement à la charpente existante, couverture tuiles.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 11 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=900&q=80" alt="Réfection toiture" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Toiture</span><span class="loc">Launaguet</span></div>
+          <h3>Réfection complète toiture</h3>
+          <p>Dépose tuiles anciennes, traitement charpente, pose nouvelle couverture en tuiles canal et zinguerie.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 3 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80" alt="Maison ancienne rénovée" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Rénovation</span><span class="loc">Aucamville</span></div>
+          <h3>Rénovation maison 1920</h3>
+          <p>Réhabilitation complète d'une maison de ville : structure, isolation, cloisons, finitions.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 18 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=900&q=80" alt="Dalle béton" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Gros œuvre</span><span class="loc">Fenouillet</span></div>
+          <h3>Dalle béton armé · 120 m²</h3>
+          <p>Terrassement, coffrage, ferraillage et coulage d'une dalle béton pour pool-house et terrasse.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 2 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=900&q=80" alt="Démolition intérieure" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Démolition</span><span class="loc">Toulouse Nord</span></div>
+          <h3>Ouverture mur porteur + IPN</h3>
+          <p>Création d'une grande ouverture entre salon et cuisine, pose de poutrelle IPN sur consoles.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 3 jours</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1597047084897-51e81819a499?auto=format&fit=crop&w=900&q=80" alt="Cloisons Placo" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Aménagement</span><span class="loc">Castelginest</span></div>
+          <h3>Cloisons & isolation Placo®</h3>
+          <p>Création de 3 nouvelles pièces avec doublage thermique et acoustique, faux plafonds décoratifs.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 4 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=900&q=80" alt="Charpente" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Charpente</span><span class="loc">Saint-Jory</span></div>
+          <h3>Charpente traditionnelle neuve</h3>
+          <p>Pose d'une charpente traditionnelle en sapin pour maison plain-pied 110 m², combles aménageables.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 2 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" alt="Muret pierre" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Maçonnerie</span><span class="loc">Bruguières</span></div>
+          <h3>Muret de clôture · 42 ml</h3>
+          <p>Construction d'un muret de clôture en parpaings avec finition enduit gratté + piliers maçonnés.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 1 sem.</span></div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__media"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80" alt="Surélévation" /></div>
+        <div class="project-card__body">
+          <div class="project-card__meta"><span class="cat">— Surélévation</span><span class="loc">Saint-Alban</span></div>
+          <h3>Surélévation 1 étage · 75 m²</h3>
+          <p>Surélévation complète d'un pavillon : renforcement structure, étage neuf, charpente, couverture.</p>
+        </div>
+        <div class="project-card__footer">
+          <span>Durée · 16 sem.</span></div>
+      </article>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 56px;">
+      <a href="contact.html" class="btn btn-dark">
+        Demander à voir un chantier en cours
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Le prochain chantier, c'est peut-être le vôtre.</h2>
+        <p>Visite gratuite, devis sous 48h, démarrage planifié avec vous.</p>
+      </div>
+      <div class="cta-band__actions">
+        <a href="tel:+33688505341" class="btn btn-primary">06 88 50 53 41</a>
+        <a href="contact.html" class="btn btn-light">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="brand"><span class="brand__mark"><span>AB</span></span><span class="brand__name">ASTI.BAT<small>Maçonnerie · Gros œuvre</small></span></a>
+        <p>Entreprise de maçonnerie générale et gros œuvre dans le nord toulousain. De la fondation à la toiture.</p>
+      </div>
+      <div><h4>Services</h4>
+        <ul>
+          <li><a href="gros-oeuvre.html">Gros œuvre & maçonnerie</a></li>
+          <li><a href="charpente-toiture.html">Charpente & toiture</a></li>
+          <li><a href="demolition-renovation.html">Démolition & rénovation</a></li>
+          <li><a href="realisations.html">Réalisations</a></li>
+        </ul>
+      </div>
+      <div><h4>Entreprise</h4>
+        <ul>
+          <li><a href="contact.html">Contact & devis</a></li>
+          <li><a href="#">Zone d'intervention</a></li>
+          <li><a href="#">Garanties</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div class="footer__contact"><h4>Nous contacter</h4>
+        <div class="line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></svg><div><b>06 88 50 53 41</b></div></div>
+        <div class="line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><div>asti.bat.realisation@gmail.com</div></div>
+        <div class="line"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div>Espace Coworking Ô31<br/>31 route de Paris, 31140 Aucamville</div></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© ASTI.BAT · Bulend AGLAR</div>
+      <div>Maçonnerie générale & gros œuvre · Aucamville</div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

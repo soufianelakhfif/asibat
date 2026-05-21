@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Audit marché — ASTI.BAT · Document interne agence</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css" />
+<style>
+  body { background: var(--cream); }
+  .doc-header {
+    background: var(--ink);
+    color: white;
+    padding: 60px 0;
+  }
+  .doc-header .tag {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 18px;
+    display: inline-block;
+  }
+  .doc-header h1 {
+    color: white;
+    font-size: clamp(2rem, 4.4vw, 3.4rem);
+    margin-bottom: 18px;
+    max-width: 22ch;
+  }
+  .doc-header__meta {
+    display: flex; gap: 32px; flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .doc-header__meta div b { color: white; display: block; margin-top: 4px; font-family: var(--f-body); font-weight: 600; text-transform: none; font-size: 0.95rem; letter-spacing: 0; }
+
+  .doc-section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .doc-section h2 {
+    color: var(--navy);
+    margin-bottom: 32px;
+    padding-left: 24px;
+    border-left: 4px solid var(--orange);
+  }
+  .doc-section h3 { color: var(--navy); font-size: 1.3rem; margin: 36px 0 14px; }
+  .doc-section p { color: #1f2937; max-width: 78ch; }
+  .doc-toc {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 32px;
+    columns: 2;
+    column-gap: 36px;
+  }
+  .doc-toc h4 {
+    column-span: all;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 0 0 18px;
+    font-weight: 500;
+  }
+  .doc-toc ol {
+    margin: 0; padding: 0; list-style: none;
+    counter-reset: toc;
+  }
+  .doc-toc li {
+    counter-increment: toc;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 0.96rem;
+    color: var(--navy);
+    break-inside: avoid;
+  }
+  .doc-toc li::before {
+    content: counter(toc, decimal-leading-zero) " · ";
+    font-family: var(--f-mono);
+    color: var(--orange);
+    margin-right: 8px;
+    font-size: 0.82rem;
+  }
+  @media (max-width: 700px) { .doc-toc { columns: 1; } }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 800px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  .insight-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+  }
+  .insight-card .num {
+    font-family: var(--f-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .insight-card b { color: var(--navy); display: block; margin-bottom: 8px; font-family: var(--f-display); font-size: 1.1rem; }
+  .insight-card p { color: var(--slate); margin: 0; font-size: 0.94rem; }
+
+  .comp-table {
+    width: 100%; border-collapse: collapse;
+    background: white;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    font-size: 0.9rem;
+  }
+  .comp-table th {
+    background: var(--cream-2);
+    text-align: left;
+    padding: 14px 16px;
+    font-family: var(--f-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    font-weight: 500;
+    border-bottom: 1px solid var(--line);
+  }
+  .comp-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: #1f2937;
+  }
+  .comp-table tr:last-child td { border-bottom: 0; }
+  .comp-table .score { font-family: var(--f-mono); font-weight: 500; }
+  .comp-table .pos { color: #16a34a; }
+  .comp-table .neg { color: #dc2626; }
+  .comp-table b { color: var(--navy); }
+
+  .kw-cloud {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .kw {
+    padding: 8px 14px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.88rem;
+    color: var(--navy);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .kw .vol { font-family: var(--f-mono); font-size: 0.72rem; color: var(--orange); }
+  .kw.priority { background: var(--navy); color: white; border-color: var(--navy); }
+  .kw.priority .vol { color: var(--orange-2); }
+
+  .reco-list {
+    counter-reset: reco;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .reco-list li {
+    counter-increment: reco;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 22px;
+    align-items: start;
+  }
+  .reco-list li::before {
+    content: counter(reco, decimal-leading-zero);
+    font-family: var(--f-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--orange);
+    background: var(--cream-2);
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: grid; place-items: center;
+    line-height: 1;
+  }
+  .reco-list h4 { font-family: var(--f-display); font-size: 1.18rem; color: var(--navy); margin: 0 0 6px; font-weight: 600; }
+  .reco-list p { margin: 0; color: var(--slate); font-size: 0.94rem; }
+  .priority-tag {
+    font-family: var(--f-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .priority-tag.high { background: #fee2e2; color: #b91c1c; }
+  .priority-tag.med { background: #fef3c7; color: #92400e; }
+  .priority-tag.low { background: #dcfce7; color: #166534; }
+  @media (max-width: 700px) {
+    .reco-list li { grid-template-columns: 56px 1fr; }
+    .priority-tag { grid-column: 2; margin-top: 4px; }
+  }
+
+  .swot {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .swot-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-left: 4px solid;
+    border-radius: var(--r);
+    padding: 24px;
+  }
+  .swot-card.S { border-left-color: #16a34a; }
+  .swot-card.W { border-left-color: #dc2626; }
+  .swot-card.O { border-left-color: var(--orange); }
+  .swot-card.T { border-left-color: #6b7280; }
+  .swot-card h4 {
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .swot-card ul { margin: 0; padding-left: 18px; color: #1f2937; font-size: 0.94rem; }
+  .swot-card li { margin-bottom: 8px; }
+  @media (max-width: 700px) { .swot { grid-template-columns: 1fr; } }
+
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .roadmap__phase {
+    padding: 28px 24px;
+    border-right: 1px solid var(--line);
+  }
+  .roadmap__phase:last-child { border-right: 0; }
+  .roadmap__phase .phase-num {
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  .roadmap__phase h4 {
+    font-family: var(--f-display);
+    font-size: 1.18rem;
+    color: var(--navy);
+    margin: 12px 0 16px;
+    font-weight: 600;
+  }
+  .roadmap__phase ul { margin: 0; padding-left: 18px; font-size: 0.9rem; color: var(--slate); }
+  .roadmap__phase li { margin-bottom: 8px; }
+  @media (max-width: 800px) {
+    .roadmap { grid-template-columns: 1fr 1fr; }
+    .roadmap__phase:nth-child(2) { border-right: 0; }
+    .roadmap__phase:nth-child(1), .roadmap__phase:nth-child(2) { border-bottom: 1px solid var(--line); }
+  }
+  @media (max-width: 500px) { .roadmap { grid-template-columns: 1fr; } .roadmap__phase { border-right: 0; border-bottom: 1px solid var(--line); } .roadmap__phase:last-child { border-bottom: 0; } }
+
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,.65);
+    font-family: var(--f-mono);
+    font-size: 0.82rem;
+    margin-bottom: 32px;
+  }
+  .nav-back:hover { color: var(--orange); }
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="container">
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Retour au site
+    </a>
+    <span class="tag">Document interne · Confidentiel agence</span>
+    <h1>Audit marché & stratégie web pour ASTI.BAT</h1>
+    <p style="font-size: 1.18rem; color: rgba(255,255,255,.74); max-width: 60ch; margin: 0;">
+      Analyse du marché de la maçonnerie générale dans le nord toulousain, benchmark des concurrents en ligne, recommandations SEO et axes de conversion à intégrer au site.
+    </p>
+    <div class="doc-header__meta">
+      <div>Client<b>ASTI.BAT · Bulend AGLAR</b></div>
+      <div>Zone<b>Aucamville (31) + nord Toulouse</b></div>
+      <div>Version<b>v1.0</b></div>
+      <div>Statut<b>Brouillon agence</b></div>
+    </div>
+  </div>
+</header>
+
+<!-- TOC -->
+<section class="doc-section">
+  <div class="container">
+    <div class="doc-toc">
+      <h4>— Sommaire</h4>
+      <ol>
+        <li><a href="#contexte" style="color: inherit;">Contexte & enjeux client</a></li>
+        <li><a href="#marche" style="color: inherit;">Le marché : chiffres et tendances</a></li>
+        <li><a href="#cibles" style="color: inherit;">Personas & parcours de décision</a></li>
+        <li><a href="#concurrents" style="color: inherit;">Benchmark concurrents locaux</a></li>
+        <li><a href="#bestp" style="color: inherit;">Best practices à intégrer</a></li>
+        <li><a href="#seo" style="color: inherit;">Stratégie SEO & mots-clés</a></li>
+        <li><a href="#swot" style="color: inherit;">SWOT digital ASTI.BAT</a></li>
+        <li><a href="#reco" style="color: inherit;">Recommandations site (priorisées)</a></li>
+        <li><a href="#roadmap" style="color: inherit;">Roadmap & next steps</a></li>
+        <li><a href="#tobring" style="color: inherit;">À récupérer auprès du client</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXTE -->
+<section class="doc-section" id="contexte">
+  <div class="container">
+    <h2>01 — Contexte & enjeux</h2>
+    <div class="grid-2" style="margin-bottom: 36px;">
+      <div>
+        <p>ASTI.BAT est une entreprise unipersonnelle de maçonnerie générale et gros œuvre, dirigée par Bulend AGLAR, installée en espace de coworking à Aucamville (31140). Le brief initial est volontairement minimaliste : un slogan, trois pages services, un logo et une carte de visite. Aucune identité digitale, aucun positionnement marketing affirmé.</p>
+        <p><b>L'enjeu réel n'est pas "faire un site"</b>, mais : transformer une activité artisanale solo en marque locale capable de capter des leads qualifiés (particuliers + petits pros) dans une zone géographique précise — sans budget pub conséquent au départ.</p>
+      </div>
+      <div>
+        <p><b>Trois objectifs business prioritaires</b> pour le site :</p>
+        <ol style="padding-left: 18px; color: #1f2937;">
+          <li style="margin-bottom: 8px;"><b>Générer des appels qualifiés</b> (CTA téléphone visible partout, n° cliquable sur mobile).</li>
+          <li style="margin-bottom: 8px;"><b>Référencer ASTI.BAT</b> dans le top 5 Google sur les requêtes "maçon + commune nord 31".</li>
+          <li><b>Crédibiliser un artisan inconnu</b> en ligne face à des concurrents établis depuis 10-20 ans.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="insight-card">
+        <span class="num">0</span>
+        <b>Présence digitale actuelle</b>
+        <p>Pas de site, pas de Google Business Profile, pas de référencement. Visibilité = bouche-à-oreille uniquement.</p>
+      </div>
+      <div class="insight-card">
+        <span class="num">~80%</span>
+        <b>Recherches mobiles BTP</b>
+        <p>La majorité des prospects cherche un artisan depuis un smartphone. Le mobile-first est non négociable.</p>
+      </div>
+      <div class="insight-card">
+        <span class="num">48h</span>
+        <b>Fenêtre de décision</b>
+        <p>Un prospect appelle 3 artisans, choisit le 1er qui répond rapidement avec un devis sérieux.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCHE -->
+<section class="doc-section" id="marche">
+  <div class="container">
+    <h2>02 — Le marché</h2>
+    <p>La Haute-Garonne est l'un des départements les plus dynamiques de France en termes de construction et de rénovation. L'agglomération toulousaine gagne ~15 000 habitants par an et les communes de la 1ère couronne nord (Aucamville, L'Union, Castelginest, Launaguet) concentrent une demande forte : maisons individuelles 1970-2000 qui arrivent en cycle de rénovation, primo-accédants qui rénovent, extensions pour les familles qui s'agrandissent sans pouvoir déménager.</p>
+
+    <div class="grid-3" style="margin: 32px 0;">
+      <div class="insight-card">
+        <span class="num">~3 800</span>
+        <b>Entreprises BTP en 31</b>
+        <p>Dont environ 600 entreprises de maçonnerie générale et gros œuvre actives.</p>
+      </div>
+      <div class="insight-card">
+        <span class="num">+8%</span>
+        <b>Croissance rénovation /an</b>
+        <p>Tiré par MaPrimeRénov', les normes thermiques et le coût du foncier neuf.</p>
+      </div>
+      <div class="insight-card">
+        <span class="num">€€</span>
+        <b>Panier moyen chantier</b>
+        <p>Rénovation globale 50-150k€, extension 25-80k€, gros œuvre seul 8-40k€.</p>
+      </div>
+    </div>
+
+    <h3>Tendances qui structurent la demande</h3>
+    <ul style="color: #1f2937;">
+      <li><b>Rénovation énergétique</b> : isolation thermique, RGE, MaPrimeRénov' — gros levier d'acquisition même si ASTI n'est pas labellisé RGE.</li>
+      <li><b>Extensions / surélévations</b> : alternative à l'achat dans une zone où le foncier flambe.</li>
+      <li><b>Méfiance post-arnaques</b> : la presse régionale couvre régulièrement les cas d'arnaques BTP. Les preuves visibles (décennale, avis, photos avant/après) sont déterminantes.</li>
+      <li><b>Bouche-à-oreille digital</b> : les avis Google ont remplacé les recommandations entre voisins. 0 avis = invisible.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CIBLES -->
+<section class="doc-section" id="cibles">
+  <div class="container">
+    <h2>03 — Cibles & parcours</h2>
+    <div class="grid-2">
+      <div class="insight-card">
+        <b style="font-size: 1.15rem;">Persona A · "Le propriétaire en rénovation"</b>
+        <p style="margin-top: 6px; margin-bottom: 14px;"><span class="mono" style="color: var(--orange); font-size: 0.82rem;">45-60 ans · Couple · Maison de 30 ans</span></p>
+        <p>Vient d'acheter ou occupe depuis 20 ans. Veut rénover : ouvrir un mur, refaire la toiture, isoler. Cherche un artisan de confiance, comparera 3 devis, prendra son temps. Lit les avis Google avant d'appeler. Sensible aux garanties et à la propreté du chantier.</p>
+      </div>
+      <div class="insight-card">
+        <b style="font-size: 1.15rem;">Persona B · "La famille qui s'agrandit"</b>
+        <p style="margin-top: 6px; margin-bottom: 14px;"><span class="mono" style="color: var(--orange); font-size: 0.82rem;">30-45 ans · 2-3 enfants · Pavillon</span></p>
+        <p>3ème enfant qui arrive, plus de place. Cherche extension ou surélévation. Très pressé, en mode comparaison. Décide vite si elle sent que l'artisan est sérieux et disponible. Très réactive au téléphone, déteste les formulaires lourds.</p>
+      </div>
+      <div class="insight-card">
+        <b style="font-size: 1.15rem;">Persona C · "Le pro / petit promoteur"</b>
+        <p style="margin-top: 6px; margin-bottom: 14px;"><span class="mono" style="color: var(--orange); font-size: 0.82rem;">Agence immo · architecte · MOA</span></p>
+        <p>Cherche un sous-traitant fiable pour des chantiers récurrents. Évalue surtout la régularité, la qualité et la communication. Devient prescripteur si la collaboration marche. Cible secondaire mais haute valeur.</p>
+      </div>
+      <div class="insight-card">
+        <b style="font-size: 1.15rem;">Persona D · "Le pressé · urgence"</b>
+        <p style="margin-top: 6px; margin-bottom: 14px;"><span class="mono" style="color: var(--orange); font-size: 0.82rem;">Tout âge · Sinistre / urgence</span></p>
+        <p>Fuite de toiture, mur fissuré, dégât des eaux. Cherche un artisan disponible <em>maintenant</em>. Appelle 5 numéros, prend le premier qui décroche et peut se déplacer dans la semaine. Décision en moins de 24h.</p>
+      </div>
+    </div>
+    <p style="margin-top: 28px;"><b>Conséquence design</b> — le site doit servir ces 4 parcours en parallèle : un CTA "Devis" pour A et B (réflexion), un téléphone surdimensionné en sticky pour C et D (urgence), une page "Réalisations" lourde pour A et C (preuve), une page FAQ pour les questions techniques (A).</p>
+  </div>
+</section>
+
+<!-- CONCURRENTS -->
+<section class="doc-section" id="concurrents">
+  <div class="container">
+    <h2>04 — Benchmark concurrents locaux</h2>
+    <p>Nous avons analysé un échantillon représentatif d'entreprises de maçonnerie active dans le nord toulousain (recherches "maçon + Aucamville / L'Union / Toulouse Nord"). Critères : qualité du site, SEO, conversion, preuve sociale.</p>
+
+    <div style="overflow-x: auto; margin-top: 28px;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Type de concurrent</th>
+            <th>Forces observées</th>
+            <th>Faiblesses</th>
+            <th>Score web /10</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Artisan établi 15+ ans</b><br/><span class="mono" style="font-size: 0.78rem; color: var(--slate);">Profil dominant</span></td>
+            <td class="pos">Page Google Business riche, 50-200 avis, photos chantiers, présence carte locale</td>
+            <td class="neg">Sites obsolètes (~2014), pas mobile, design daté, info incomplète</td>
+            <td class="score">5/10</td>
+          </tr>
+          <tr>
+            <td><b>Annuaires (PagesJaunes, Houzz, Ootravaux)</b></td>
+            <td class="pos">Top SEO sur requêtes génériques, captent énormément de trafic</td>
+            <td class="neg">Lead distribué entre 5-10 artisans, marge minée, dépendance forte</td>
+            <td class="score">7/10</td>
+          </tr>
+          <tr>
+            <td><b>Réseau / franchise (Camif Habitat, Illico Travaux)</b></td>
+            <td class="pos">Site très pro, devis en ligne, SEA actif, simulation prix</td>
+            <td class="neg">Tarifs gonflés, commissionnement, manque de proximité</td>
+            <td class="score">8/10</td>
+          </tr>
+          <tr>
+            <td><b>Artisan "moderne" rare</b><br/><span class="mono" style="font-size: 0.78rem; color: var(--slate);">~10% du marché</span></td>
+            <td class="pos">Site clean, photos pro, avis Google ++, identité forte. <b>C'est notre cible benchmark.</b></td>
+            <td class="neg">Souvent positionnés haut de gamme · prix élevés</td>
+            <td class="score">9/10</td>
+          </tr>
+          <tr>
+            <td><b>Artisan invisible</b><br/><span class="mono" style="font-size: 0.78rem; color: var(--slate);">État initial d'ASTI.BAT</span></td>
+            <td>Bouche-à-oreille, parfois page FB</td>
+            <td class="neg">0 site, 0 avis, 0 SEO. Invisible aux 80% qui cherchent en ligne.</td>
+            <td class="score">2/10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 28px;"><b>Conclusion</b> — la marche est basse. Un site moderne, propre, mobile-first avec un SEO local sérieux place immédiatement ASTI.BAT dans le top 15-20% du marché digital local. C'est un effet de levier énorme pour une investissement raisonnable.</p>
+  </div>
+</section>
+
+<!-- BEST PRACTICES -->
+<section class="doc-section" id="bestp">
+  <div class="container">
+    <h2>05 — Best practices à intégrer (et déjà intégrées)</h2>
+    <p>Ce que font les meilleurs sites BTP locaux, et ce qu'on a transposé dans la version actuelle d'ASTI.BAT :</p>
+
+    <div class="grid-2" style="margin-top: 28px;">
+      <div class="insight-card">
+        <b>✓ Numéro de téléphone partout</b>
+        <p>Le tél en haut de chaque page, cliquable sur mobile (tel:), dans la nav, le hero, le CTA, le footer. Le CTA #1 du BTP local reste l'appel direct. <b>Intégré.</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Photos chantiers réelles</b>
+        <p>Une galerie "Réalisations" avec localisation et catégorie. Plus efficace que n'importe quel argumentaire commercial. <b>Structure intégrée — photos client à fournir.</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Garanties visibles</b>
+        <p>Décennale, RC pro, années d'expérience, chantiers livrés. À afficher dès le hero. <b>Intégré (mais chiffres à valider avec le client).</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Avis Google embarqués</b>
+        <p>Note, nombre d'avis, témoignages cités. Crédibilité instantanée. <b>Mockup intégré — à remplacer par vrais avis dès activation du Google Business Profile.</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Pages services dédiées</b>
+        <p>1 URL = 1 mot-clé principal. Indispensable pour le SEO. <b>3 pages services créées (gros œuvre, charpente, démolition).</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Process clair en étapes</b>
+        <p>Le client est rassuré quand il sait à quoi s'attendre. Devis → planning → chantier → livraison. <b>Intégré sur l'accueil.</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ FAQ orientée objections</b>
+        <p>Délais, assurances, gravats, démarches. La FAQ répond aux questions qui freinent l'appel. <b>Intégrée + bon pour SEO longue traîne.</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Zone d'intervention listée</b>
+        <p>Lister les communes — ça matche les recherches "maçon + nom_commune" qui sont les plus qualifiées. <b>Intégré (12 communes).</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Schema.org GeneralContractor</b>
+        <p>Le balisage structuré qui aide Google à afficher l'entreprise dans le pack local. <b>Intégré dans &lt;head&gt;.</b></p>
+      </div>
+      <div class="insight-card">
+        <b>✓ Adresse + carte + horaires</b>
+        <p>Améliore le SEO local et rassure. <b>Intégré sur la page Contact.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEO -->
+<section class="doc-section" id="seo">
+  <div class="container">
+    <h2>06 — Stratégie SEO & mots-clés</h2>
+    <p>Le SEO local d'un artisan BTP repose sur 3 piliers : <b>Google Business Profile</b> (avis, photos, posts), <b>contenu géolocalisé</b> (pages avec mots-clés "métier + commune"), <b>autorité locale</b> (citations, mentions, partenariats).</p>
+
+    <h3>Mots-clés prioritaires (à viser top 3)</h3>
+    <div class="kw-cloud" style="margin-bottom: 28px;">
+      <span class="kw priority">maçon Aucamville <span class="vol">↑↑↑</span></span>
+      <span class="kw priority">maçonnerie nord Toulouse <span class="vol">↑↑↑</span></span>
+      <span class="kw priority">gros œuvre Toulouse <span class="vol">↑↑↑</span></span>
+      <span class="kw priority">entreprise maçonnerie 31 <span class="vol">↑↑</span></span>
+      <span class="kw priority">extension maison Toulouse <span class="vol">↑↑↑</span></span>
+      <span class="kw priority">rénovation maison 31140 <span class="vol">↑↑</span></span>
+    </div>
+
+    <h3>Mots-clés secondaires (longue traîne)</h3>
+    <div class="kw-cloud" style="margin-bottom: 28px;">
+      <span class="kw">ouverture mur porteur Toulouse <span class="vol">↑↑</span></span>
+      <span class="kw">pose IPN 31 <span class="vol">↑</span></span>
+      <span class="kw">dalle béton armé Toulouse <span class="vol">↑↑</span></span>
+      <span class="kw">refaire toiture Aucamville <span class="vol">↑↑</span></span>
+      <span class="kw">isolation combles 31 <span class="vol">↑↑↑</span></span>
+      <span class="kw">surélévation maison Haute-Garonne <span class="vol">↑</span></span>
+      <span class="kw">démolition cloison Toulouse <span class="vol">↑</span></span>
+      <span class="kw">muret de clôture 31 <span class="vol">↑↑</span></span>
+      <span class="kw">artisan maçon L'Union <span class="vol">↑</span></span>
+      <span class="kw">maçon Castelginest <span class="vol">↑↑</span></span>
+      <span class="kw">maçon Launaguet <span class="vol">↑↑</span></span>
+      <span class="kw">maçon Fenouillet <span class="vol">↑↑</span></span>
+    </div>
+
+    <h3>Plan d'action SEO en 5 actions</h3>
+    <ol style="color: #1f2937;">
+      <li><b>Google Business Profile</b> · création immédiate du profil avec adresse, horaires, photos, services. C'est l'action #1 priorité absolue.</li>
+      <li><b>Récolte d'avis Google</b> · objectif 10 avis en 3 mois (demander à chaque client en fin de chantier via SMS).</li>
+      <li><b>Pages "zones"</b> · créer 5-10 pages dédiées par commune ("Maçon à L'Union", "Maçon à Castelginest"...) avec contenu unique.</li>
+      <li><b>Blog technique</b> · 1 article / mois ("Combien coûte une dalle béton ?", "Quelle assurance pour ouvrir un mur porteur ?"). Très efficace pour longue traîne.</li>
+      <li><b>Citations locales</b> · inscription sur PagesJaunes, 118712, Houzz, Travauxlib pour générer des backlinks et signaux NAP cohérents.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- SWOT -->
+<section class="doc-section" id="swot">
+  <div class="container">
+    <h2>07 — SWOT digital ASTI.BAT</h2>
+    <div class="swot">
+      <div class="swot-card S">
+        <h4>— Forces (Strengths)</h4>
+        <ul>
+          <li>Offre complète (gros œuvre → toiture → rénovation) = un seul interlocuteur</li>
+          <li>Identité visuelle déjà posée (logo, palette, carte de visite)</li>
+          <li>Implantation locale précise (Aucamville)</li>
+          <li>Profil artisan unipersonnel = relation directe, réactivité</li>
+        </ul>
+      </div>
+      <div class="swot-card W">
+        <h4>— Faiblesses (Weaknesses)</h4>
+        <ul>
+          <li>Aucune présence digitale préexistante (0 avis, 0 référencement)</li>
+          <li>Pas de photos chantiers professionnelles fournies à ce jour</li>
+          <li>Pas de label RGE (frein pour la rénov énergétique aidée)</li>
+          <li>Statut unipersonnel = capacité de production limitée</li>
+        </ul>
+      </div>
+      <div class="swot-card O">
+        <h4>— Opportunités (Opportunities)</h4>
+        <ul>
+          <li>Concurrence locale digitalement faible — fenêtre d'entrée idéale</li>
+          <li>Boom rénovation/extension dans la 1ère couronne nord</li>
+          <li>Possibilité de devenir "le maçon" du nord toulousain en 18 mois</li>
+          <li>Pas de spécialiste reconnu en "ouverture mur porteur" en local</li>
+        </ul>
+      </div>
+      <div class="swot-card T">
+        <h4>— Menaces (Threats)</h4>
+        <ul>
+          <li>Saturation publicitaire des grands réseaux (Camif, IZI by EDF)</li>
+          <li>Plateformes de mise en relation qui captent le lead amont</li>
+          <li>Hausse des prix des matériaux qui rogne les marges</li>
+          <li>Méfiance générale envers les artisans (arnaques médiatisées)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECO -->
+<section class="doc-section" id="reco">
+  <div class="container">
+    <h2>08 — Recommandations (priorisées)</h2>
+    <p>Liste actionnable, par priorité décroissante. Certaines dépendent d'éléments à récupérer auprès du client (cf. section 10).</p>
+
+    <ol class="reco-list" style="margin-top: 28px;">
+      <li>
+        <div>
+          <h4>Créer le Google Business Profile <em>aujourd'hui</em></h4>
+          <p>C'est l'action n°1 absolue. Plus impactante que le site lui-même pour les 6 premiers mois. Adresse, horaires, services, 5-10 photos chantier minimum.</p>
+        </div>
+        <span class="priority-tag high">P0 · Critique</span>
+      </li>
+      <li>
+        <div>
+          <h4>Lancer la campagne d'avis Google</h4>
+          <p>SMS-type à envoyer à chaque client en fin de chantier avec lien direct vers la fiche. Objectif 10 avis en 90 jours, 30 en 1 an.</p>
+        </div>
+        <span class="priority-tag high">P0 · Critique</span>
+      </li>
+      <li>
+        <div>
+          <h4>Récupérer des photos chantiers réelles</h4>
+          <p>Le client doit envoyer 15-30 photos de ses meilleurs chantiers (avant/après si possible). Sans ça, la page "Réalisations" sonne creux. Photographe pro pourrait être facturé en option (~600€).</p>
+        </div>
+        <span class="priority-tag high">P0 · Critique</span>
+      </li>
+      <li>
+        <div>
+          <h4>Valider tous les chiffres affichés</h4>
+          <p>Années d'expérience, nombre de chantiers, note Google. Actuellement ce sont des placeholders crédibles ; à fixer avec le client avant mise en ligne.</p>
+        </div>
+        <span class="priority-tag high">P0 · Critique</span>
+      </li>
+      <li>
+        <div>
+          <h4>Confirmer l'assurance décennale + RC pro</h4>
+          <p>Numéro et compagnie, à afficher en footer + page mentions légales. Argument de réassurance majeur.</p>
+        </div>
+        <span class="priority-tag med">P1 · Important</span>
+      </li>
+      <li>
+        <div>
+          <h4>Créer les pages "zones" géolocalisées</h4>
+          <p>5 à 10 landing pages format "Maçon à [commune]" avec contenu unique. Boost SEO local massif pour un effort modéré.</p>
+        </div>
+        <span class="priority-tag med">P1 · Important</span>
+      </li>
+      <li>
+        <div>
+          <h4>Démarrer un blog technique (1 article/mois)</h4>
+          <p>Sujets : "Combien coûte X ?", "Comment se déroule Y ?", "Que dit la loi sur Z ?". Cible la longue traîne et installe l'autorité.</p>
+        </div>
+        <span class="priority-tag med">P1 · Important</span>
+      </li>
+      <li>
+        <div>
+          <h4>Brancher un vrai formulaire (Formspree / EmailJS)</h4>
+          <p>Le formulaire actuel est une démo. À connecter à un backend mail qui notifie Bulend en temps réel. Idéalement coupler avec un SMS d'alerte.</p>
+        </div>
+        <span class="priority-tag med">P1 · Important</span>
+      </li>
+      <li>
+        <div>
+          <h4>Ajouter un widget WhatsApp Business</h4>
+          <p>Beaucoup de clients préfèrent WhatsApp à l'appel ou au mail. Bouton flottant en bas à droite, conversion ++.</p>
+        </div>
+        <span class="priority-tag low">P2 · Bonus</span>
+      </li>
+      <li>
+        <div>
+          <h4>Mettre en place un suivi analytics</h4>
+          <p>Plausible ou Google Analytics 4 + tracking des clics téléphone et formulaire. Indispensable pour optimiser dans le temps.</p>
+        </div>
+        <span class="priority-tag low">P2 · Bonus</span>
+      </li>
+      <li>
+        <div>
+          <h4>Étudier une labellisation RGE</h4>
+          <p>Ouvre l'accès aux aides MaPrimeRénov' et au flux de leads "rénovation énergétique". Effort administratif et formation, mais ROI fort.</p>
+        </div>
+        <span class="priority-tag low">P2 · Bonus</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="doc-section" id="roadmap">
+  <div class="container">
+    <h2>09 — Roadmap proposée</h2>
+    <div class="roadmap">
+      <div class="roadmap__phase">
+        <span class="phase-num">— Phase 01 · J0 → J15</span>
+        <h4>Setup digital</h4>
+        <ul>
+          <li>Google Business Profile</li>
+          <li>Récup photos chantier</li>
+          <li>Validation contenus avec client</li>
+          <li>Mise en ligne v1 du site</li>
+          <li>Connexion formulaire mail</li>
+        </ul>
+      </div>
+      <div class="roadmap__phase">
+        <span class="phase-num">— Phase 02 · J15 → J60</span>
+        <h4>Acquisition initiale</h4>
+        <ul>
+          <li>Inscriptions annuaires</li>
+          <li>Demande systématique d'avis</li>
+          <li>Pages zones (3 communes)</li>
+          <li>1er article de blog</li>
+          <li>Lancement analytics</li>
+        </ul>
+      </div>
+      <div class="roadmap__phase">
+        <span class="phase-num">— Phase 03 · J60 → J180</span>
+        <h4>Montée en puissance</h4>
+        <ul>
+          <li>5 articles supplémentaires</li>
+          <li>Pages zones complètes (10)</li>
+          <li>Photos pros chantiers</li>
+          <li>Étude budget Google Ads</li>
+          <li>Widget WhatsApp</li>
+        </ul>
+      </div>
+      <div class="roadmap__phase">
+        <span class="phase-num">— Phase 04 · J180+</span>
+        <h4>Consolidation</h4>
+        <ul>
+          <li>Audit SEO + ajustements</li>
+          <li>30+ avis Google atteints</li>
+          <li>Optimisations conversion</li>
+          <li>Étude label RGE</li>
+          <li>Refresh visuel si besoin</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TO BRING -->
+<section class="doc-section" id="tobring" style="border-bottom: 0;">
+  <div class="container">
+    <h2>10 — À récupérer auprès du client</h2>
+    <p>Checklist pour finaliser le site avant mise en ligne :</p>
+
+    <div class="grid-2" style="margin-top: 28px;">
+      <div class="insight-card">
+        <b>Données chiffrées à valider</b>
+        <ul style="margin: 10px 0 0; padding-left: 18px; color: var(--slate); font-size: 0.94rem;">
+          <li>Vraies années d'activité (actuel : "10+")</li>
+          <li>Nombre réel de chantiers livrés (actuel : "120+")</li>
+          <li>Note Google + nombre d'avis (actuel : "4.9 / 47")</li>
+          <li>Délais réels devis et démarrage</li>
+        </ul>
+      </div>
+      <div class="insight-card">
+        <b>Assurances & garanties</b>
+        <ul style="margin: 10px 0 0; padding-left: 18px; color: var(--slate); font-size: 0.94rem;">
+          <li>Compagnie + n° décennale</li>
+          <li>Compagnie + n° RC pro</li>
+          <li>SIRET / RCS</li>
+          <li>Éventuelles certifications (Qualibat, RGE…)</li>
+        </ul>
+      </div>
+      <div class="insight-card">
+        <b>Médias & visuels</b>
+        <ul style="margin: 10px 0 0; padding-left: 18px; color: var(--slate); font-size: 0.94rem;">
+          <li>15-30 photos chantier (avant/pendant/après)</li>
+          <li>Portrait artisan (optionnel mais fort impact)</li>
+          <li>Photos d'équipe / matériel</li>
+          <li>Vrais témoignages clients</li>
+        </ul>
+      </div>
+      <div class="insight-card">
+        <b>Stratégie & positionnement</b>
+        <ul style="margin: 10px 0 0; padding-left: 18px; color: var(--slate); font-size: 0.94rem;">
+          <li>Liste définitive des communes</li>
+          <li>Préférence par typologie de chantier</li>
+          <li>Plafond CA souhaité / capacité</li>
+          <li>Tarif horaire indicatif (pour le blog)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 60px; padding: 32px; background: var(--navy); color: white; border-radius: var(--r-lg);">
+      <span class="tag" style="font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange);">— Synthèse</span>
+      <h3 style="color: white; margin: 14px 0 14px; font-size: 1.6rem;">Ce qu'on livre · ce qu'il reste à faire</h3>
+      <p style="color: rgba(255,255,255,.78); margin: 0; max-width: 70ch;">
+        Le site v1 livré couvre toutes les bases d'un site BTP local pro : structure SEO-friendly, parcours conversion clair, identité visuelle propre, mobile-first, schema.org, FAQ et zones d'intervention. Pour passer de "site joli" à <b style="color: white;">"machine à leads"</b>, les 3 actions critiques restent : <b style="color: var(--orange-2);">activer Google Business Profile</b>, <b style="color: var(--orange-2);">collecter 10 premiers avis</b>, et <b style="color: var(--orange-2);">remplacer les placeholders par des données client réelles</b>.
+      </p>
+    </div>
+
+    <p style="margin-top: 60px; text-align: center;"><a href="index.html" class="btn btn-dark">Retour au site ASTI.BAT</a></p>
+  </div>
+</section>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
