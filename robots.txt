@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/favicon/site.webmanifest
+
+Sitemap: https://asti-bat.fr/sitemap.xml

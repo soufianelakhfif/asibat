@@ -1,6 +1,6 @@
 /* ASTI.BAT — interactions légères */
 (function () {
-  // Reveal on scroll — progressive enhancement
+  // ─── Reveal on scroll — progressive enhancement ─────────────
   // 1. Hide elements via JS (so CSS default remains visible if JS fails)
   // 2. IntersectionObserver reveals on scroll
   // 3. Safety timeout reveals everything after 2.5s no matter what
@@ -34,25 +34,25 @@
     }
   }
 
-  // Contact form: chip select (multi)
-  document.querySelectorAll('[data-chip-group]').forEach((g) => {
-    g.querySelectorAll('.chip').forEach((c) => {
-      c.addEventListener('click', () => c.classList.toggle('active'));
+  // ─── Mobile burger menu ─────────────────────────────────────
+  const burger = document.querySelector('.nav__burger');
+  if (burger) {
+    const setOpen = (open) => {
+      document.body.classList.toggle('menu-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    burger.addEventListener('click', () => {
+      setOpen(!document.body.classList.contains('menu-open'));
     });
-  });
-
-  // Contact form: fake submit (demo)
-  const f = document.getElementById('quote-form');
-  if (f) {
-    f.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = f.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.innerHTML = 'Envoi en cours…';
-      setTimeout(() => {
-        btn.innerHTML = '✓ Demande envoyée — nous vous rappelons sous 24h';
-        btn.style.background = '#22C55E';
-      }, 900);
+    // Close on link click (so anchors / nav navigation feels right)
+    document.querySelectorAll('.nav__links a').forEach((a) => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+        setOpen(false);
+      }
     });
   }
 })();
