@@ -133,7 +133,7 @@ p  { margin: 0 0 1em; text-wrap: pretty; color: #2A2F3A; }
 }
 .nav__inner {
   display: flex; align-items: center; justify-content: space-between;
-  height: 84px;
+  height: 96px;
   gap: 24px;
 }
 .brand {
@@ -180,28 +180,28 @@ p  { margin: 0 0 1em; text-wrap: pretty; color: #2A2F3A; }
 
 /* Image-based logo (when brand uses uploads/logo-astibat.png) */
 .brand__logo {
-  height: 56px;
+  height: 80px;
   width: auto;
   display: block;
   object-fit: contain;
   flex-shrink: 0;
 }
 .footer__brand .brand__logo {
-  height: 64px;
+  height: 72px;
   background: var(--cream);
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 10px;
 }
 
 .nav__links {
-  display: flex; gap: 2px;
+  display: flex; gap: 0;
   list-style: none; padding: 0; margin: 0;
 }
 .nav__links a {
   display: inline-block;
-  padding: 9px 13px;
+  padding: 8px 10px;
   border-radius: 8px;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: #1f2937;
   white-space: nowrap;
@@ -211,9 +211,10 @@ p  { margin: 0 0 1em; text-wrap: pretty; color: #2A2F3A; }
 .nav__links a.active { color: var(--navy); background: rgba(11,30,63,0.06); }
 
 .nav__cta {
-  display: flex; gap: 12px; align-items: center;
+  display: flex; gap: 10px; align-items: center;
   flex-shrink: 0;
 }
+.nav__cta .btn { padding: 11px 18px; font-size: 0.92rem; }
 .nav__phone {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--f-mono);
@@ -252,7 +253,7 @@ body.menu-open .nav__burger .icon-close { display: block; }
 
   .nav__links {
     position: fixed;
-    top: 84px;
+    top: 96px;
     left: 0; right: 0;
     flex-direction: column;
     align-items: stretch;
@@ -266,7 +267,7 @@ body.menu-open .nav__burger .icon-close { display: block; }
     visibility: hidden;
     transition: transform .25s ease, opacity .2s ease, visibility 0s linear .25s;
     z-index: 49;
-    max-height: calc(100vh - 84px);
+    max-height: calc(100vh - 96px);
     overflow-y: auto;
   }
   body.menu-open .nav__links {
@@ -283,10 +284,10 @@ body.menu-open .nav__burger .icon-close { display: block; }
   body.menu-open { overflow: hidden; }
 }
 @media (max-width: 560px) {
-  .brand__logo { height: 46px; }
-  .footer__brand .brand__logo { height: 56px; }
-  .nav__inner { height: 72px; }
-  .nav__links { top: 72px; }
+  .brand__logo { height: 56px; }
+  .footer__brand .brand__logo { height: 64px; }
+  .nav__inner { height: 80px; }
+  .nav__links { top: 80px; max-height: calc(100vh - 80px); }
 }
 
 /* =========================================================
