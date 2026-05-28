@@ -250,6 +250,7 @@ body.menu-open .nav__burger .icon-close { display: block; }
 }
 @media (max-width: 980px) {
   .nav__burger { display: inline-flex; }
+  .nav__cta { display: none; }
 
   .nav__links {
     position: fixed;
